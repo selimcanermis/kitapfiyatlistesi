@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+##### D&R URLS #####
 ithaki_dr_url = "https://www.dr.com.tr/Yayinevi/ithaki-yayinlari/s=5119"
 isbankasi_dr_url = "https://www.dr.com.tr/Yayinevi/is-bankasi-kultur-yayinlari/s=5109"
 yky_dr_url = "https://www.dr.com.tr/Yayinevi/yapi-kredi-yayinlari/s=10615"
@@ -12,7 +13,7 @@ altin_dr_url = "https://www.dr.com.tr/yayinevi/altin-kitaplar/s=510"
 ayrinti_dr_url = "https://www.dr.com.tr/yayinevi/ayrinti-yayinlari/s=1113"
 kodlab_dr_url = "https://www.dr.com.tr/yayinevi/kodlab/s=5693"
 
-
+##### IDEFIX URLS #####
 ithaki_idefix_url = "https://www.idefix.com/yayinevi/ithaki-yayinlari/s=5119"
 isbankasi_idefix_url = "https://www.idefix.com/yayinevi/is-bankasi-kultur-yayinlari/s=5109"
 yky_idefix_url = "https://www.idefix.com/yayinevi/yapi-kredi-yayinlari/s=10615"
