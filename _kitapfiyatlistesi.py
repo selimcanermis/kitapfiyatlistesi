@@ -5,9 +5,7 @@ sys.path.append("C:\\Users\\selim-can\\kitapfiyatlistesi")
 import urls
 
 tl = "TL"
-
-
-
+start = 0
 
 def titleScript(param, store):
     if store == "dr":
@@ -29,6 +27,16 @@ def titleScript(param, store):
         print("-"*120)  
     elif store == "kidega":
         title = param.find("div",{"class":"col-md-9 col-xs-9 ttl"}).find("h1").string.upper()
+        title = titleCheck(title)
+        print(title)
+        print("-"*120)
+        print("|" + title.rjust(60) + "|".rjust(59," "))
+        print("-"*120)
+    elif store == "ilknokta":
+        print("title ilknoktadayım")
+        title = param.find("div", {"class":"publisher"}).string.upper()
+        print("title yazılacak")
+        print(title)
         title = titleCheck(title)
         print(title)
         print("-"*120)
@@ -121,6 +129,22 @@ def getList(soup, store):
 
             print(str(count).rjust(2), name.ljust(70,"."), author.ljust(30), price[:-1].ljust(5), tl) 
 
+    elif store == "ilknokta":
+        #list_kyurdu = soup.find("div",{"class":"grid_9"}).find_all("div",{"class":"product-cr"})
+        list_kidega = soup.find_all("div",{"class":"prd_info"}) #!Short way
+        count = 0
+        titleScript(soup, store)
+
+        for l in list_kidega:
+            name = l.find("div", {"class":"name"}).find("a").string.strip()
+            author = l.find("div", {"class":"writer"}).find("a")
+            price = l.find("span", {"class":"price price_sale convert_cur"}).text.strip()
+            count +=1
+            #print(len(price))
+            author = authorCheck(author)
+
+            print(str(count).rjust(2), name.ljust(70,"."), author.ljust(30), price[:-1].ljust(5), tl)
+
 
 def ithaki(store):
     if store == "dr":
@@ -131,6 +155,8 @@ def ithaki(store):
         getSoup(urls.ithaki_bkm_url, store)
     elif store == "kidega":
         getSoup(urls.ithaki_kidega_url, store)
+    elif store == "ilknokta":
+        getSoup(urls.ithaki_ilknokta_url, store)
 
 def isbankasi(store):
     if store == "dr":
@@ -141,6 +167,8 @@ def isbankasi(store):
         getSoup(urls.isbankasi_bkm_url, store)
     elif store == "kidega":
         getSoup(urls.isbankasi_kidega_url, store)
+    elif store == "ilknokta":
+        getSoup(urls.isbankasi_ilknokta_url, store)
 
 def yky(store):
     if store == "dr":
@@ -151,6 +179,8 @@ def yky(store):
         getSoup(urls.yky_bkm_url, store)
     elif store == "kidega":
         getSoup(urls.yky_kidega_url, store)
+    elif store == "ilknokta":
+        getSoup(urls.yky_ilknokta_url, store)
 
 def can(store):
     if store == "dr":
@@ -161,6 +191,8 @@ def can(store):
         getSoup(urls.can_bkm_url, store)
     elif store == "kidega":
         getSoup(urls.can_kidega_url, store)
+    elif store == "ilknokta":
+        getSoup(urls.can_ilknokta_url, store)
 
 def dogan(store):
     if store == "dr":
@@ -171,6 +203,8 @@ def dogan(store):
         getSoup(urls.dogan_bkm_url, store)
     elif store == "kidega":
         getSoup(urls.dogan_kidega_url, store)
+    elif store == "ilknokta":
+        getSoup(urls.dogan_ilknokta_url, store)
 
 def kronik(store):
     if store == "dr":
@@ -181,6 +215,8 @@ def kronik(store):
         getSoup(urls.kronik_bkm_url, store)
     elif store == "kidega":
         getSoup(urls.kronik_kidega_url, store)
+    elif store == "ilknokta":
+        getSoup(urls.kronik_ilknokta_url, store)
 
 def sel(store):
     if store == "dr":
@@ -191,6 +227,8 @@ def sel(store):
         getSoup(urls.sel_bkm_url, store)
     elif store == "kidega":
         getSoup(urls.sel_kidega_url, store)
+    elif store == "ilknokta":
+        getSoup(urls.sel_ilknokta_url, store)
 
 def altin(store):
     if store == "dr":
@@ -201,6 +239,8 @@ def altin(store):
         getSoup(urls.altin_bkm_url, store)
     elif store == "kidega":
         getSoup(urls.altin_kidega_url, store)
+    elif store == "ilknokta":
+        getSoup(urls.altin_ilknokta_url, store)
 
 def ayrinti(store):
     if store == "dr":
@@ -211,6 +251,8 @@ def ayrinti(store):
         getSoup(urls.ayrinti_bkm_url, store)
     elif store == "kidega":
         getSoup(urls.ayrinti_kidega_url, store)
+    elif store == "ilknokta":
+        getSoup(urls.ayrinti_ilknokta_url, store)
 
 def iletisim(store):
     if store == "dr":
@@ -221,51 +263,58 @@ def iletisim(store):
         getSoup(urls.iletisim_bkm_url, store)
     elif store == "kidega":
         getSoup(urls.iletisim_kidega_url, store)
+    elif store == "ilknokta":
+        getSoup(urls.iletisim_ilknokta_url, store)
 
 #! Burada klavyeden farklı bir şey girerse sorgusu yok!!!
 def menu():
+    global start
     while True:
-        print("-"*30)
-        store_choice = input("1- D&R\n2- Idefix \n3- BKM Kitap \n4- Kidega \n0- Exit\nYour Choice?: ")
-        print("-"*30)
-        if store_choice == "0":
-            break
-        else:
-            if store_choice == "1":
-                store = "dr"
-            elif store_choice == "2":
-                store = "idefix"
-            elif store_choice == "3":
-                store = "bkm"
-            elif store_choice == "4":
-                store = "kidega"
-
-        print("-"*30)
-        choice = input("1- Ithaki Yayinlari\n2- Is Bankasi Yayinlari\n3- Yapı Kredi Yayinlari\n4- Can Yayinlari\n5- Dogan Kitap\n6- Kronik Kitap\n7- Sel Yayincilik\n8- Altin Kitap\n9- Ayrinti Yayinlari\n10- İletisim Yayinlari\n0- Back\nYour Choice?: ")
-        print("-"*30)
-        if choice == "0":
-            break
-        else:
-            if choice=="1":
-                ithaki(store)
-            elif choice=="2":
-                isbankasi(store)
-            elif choice=="3":
-                yky(store)
-            elif choice=="4":
-                can(store)
-            elif choice=="5":
-                dogan(store)
-            elif choice=="6":
-                kronik(store)
-            elif choice=="7":
-                sel(store)
-            elif choice=="8":
-                altin(store)
-            elif choice=="9":
-                ayrinti(store)
-            elif choice=="10":
-                iletisim(store)
+        if start == 0:
+            print("-"*30)
+            store_choice = input("1- D&R\n2- Idefix \n3- BKM Kitap \n4- Kidega \n5- İlk Nokta \n0- Exit\nYour Choice?: ")
+            print("-"*30)
+            if store_choice == "0":
+                break
+            else:
+                if store_choice == "1":
+                    store = "dr"
+                elif store_choice == "2":
+                    store = "idefix"
+                elif store_choice == "3":
+                    store = "bkm"
+                elif store_choice == "4":
+                    store = "kidega"
+                elif store_choice == "5":
+                    store = "ilknokta"
+                start+=1    
+        if start == 1:
+            print("-"*30)
+            choice = input("1- Ithaki Yayinlari\n2- Is Bankasi Yayinlari\n3- Yapı Kredi Yayinlari\n4- Can Yayinlari\n5- Dogan Kitap\n6- Kronik Kitap\n7- Sel Yayincilik\n8- Altin Kitap\n9- Ayrinti Yayinlari\n10- İletisim Yayinlari\n0- Back\nYour Choice?: ")
+            print("-"*30)
+            if choice == "0":
+                start-=1
+            else:
+                if choice=="1":
+                    ithaki(store)
+                elif choice=="2":
+                    isbankasi(store)
+                elif choice=="3":
+                    yky(store)
+                elif choice=="4":
+                    can(store)
+                elif choice=="5":
+                    dogan(store)
+                elif choice=="6":
+                    kronik(store)
+                elif choice=="7":
+                    sel(store)
+                elif choice=="8":
+                    altin(store)
+                elif choice=="9":
+                    ayrinti(store)
+                elif choice=="10":
+                    iletisim(store)
 
 
 menu()
