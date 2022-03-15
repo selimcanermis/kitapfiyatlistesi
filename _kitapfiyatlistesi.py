@@ -3,9 +3,11 @@ from bs4 import BeautifulSoup
 import sys
 sys.path.append("C:\\Users\\selim-can\\kitapfiyatlistesi")
 import urls
+import info
 
 tl = "TL"
 start = False
+
 
 def titleScript(param, store):
     if store == "dr":
@@ -268,12 +270,14 @@ def iletisim(store):
 
 #! Burada klavyeden farklı bir şey girerse sorgusu yok!!!
 def menu():
+    info.infoScript()
     global start
     while True:
         if start == False:
             print("-"*30)
-            store_choice = input("1- D&R\n2- Idefix \n3- BKM Kitap \n4- Kidega \n5- İlk Nokta \n0- Exit\nYour Choice?: ")
+            print("KITAP MAGAZALARI".rjust(25))
             print("-"*30)
+            store_choice = input("1- D&R\n2- Idefix \n3- BKM Kitap \n4- Kidega \n5- İlk Nokta \n0- Exit\nYour Choice?: ")
             if store_choice == "0":
                 break
             else:
@@ -289,6 +293,8 @@ def menu():
                     store = "ilknokta"
                 start = True   
         if start == True:
+            print("-"*30)
+            print("YAYINEVLERİ".rjust(22))
             print("-"*30)
             choice = input("1- Ithaki Yayinlari\n2- Is Bankasi Yayinlari\n3- Yapı Kredi Yayinlari\n4- Can Yayinlari\n5- Dogan Kitap\n6- Kronik Kitap\n7- Sel Yayincilik\n8- Altin Kitap\n9- Ayrinti Yayinlari\n10- İletisim Yayinlari\n0- Back\nYour Choice?: ")
             print("-"*30)
@@ -315,7 +321,6 @@ def menu():
                     ayrinti(store)
                 elif choice=="10":
                     iletisim(store)
-
 
 menu()
 
