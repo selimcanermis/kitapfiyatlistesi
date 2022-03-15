@@ -5,7 +5,7 @@ sys.path.append("C:\\Users\\selim-can\\kitapfiyatlistesi")
 import urls
 
 tl = "TL"
-start = 0
+start = False
 
 def titleScript(param, store):
     if store == "dr":
@@ -270,7 +270,7 @@ def iletisim(store):
 def menu():
     global start
     while True:
-        if start == 0:
+        if start == False:
             print("-"*30)
             store_choice = input("1- D&R\n2- Idefix \n3- BKM Kitap \n4- Kidega \n5- İlk Nokta \n0- Exit\nYour Choice?: ")
             print("-"*30)
@@ -287,13 +287,13 @@ def menu():
                     store = "kidega"
                 elif store_choice == "5":
                     store = "ilknokta"
-                start+=1    
-        if start == 1:
+                start = True   
+        if start == True:
             print("-"*30)
             choice = input("1- Ithaki Yayinlari\n2- Is Bankasi Yayinlari\n3- Yapı Kredi Yayinlari\n4- Can Yayinlari\n5- Dogan Kitap\n6- Kronik Kitap\n7- Sel Yayincilik\n8- Altin Kitap\n9- Ayrinti Yayinlari\n10- İletisim Yayinlari\n0- Back\nYour Choice?: ")
             print("-"*30)
             if choice == "0":
-                start-=1
+                start = False
             else:
                 if choice=="1":
                     ithaki(store)
